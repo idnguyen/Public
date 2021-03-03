@@ -23,4 +23,45 @@ RUN npm install -g gulp
 RUN npm install gulp
 RUN apk add --no-cache curl
 
+
+RUN apk update && apk --no-cache add \
+  g++ \
+  make \
+  libffi-dev \
+  openssl-dev \
+  zip
+
+RUN npm install @aws-cdk/cloud-assembly-schema
+RUN npm install @aws-cdk/cx-api
+
+RUN npm i @aws-cdk/core
+RUN npm i source-map-support
+
+RUN npm i @aws-cdk/aws-lambda
+RUN npm i @aws-cdk/aws-iam
+RUN npm i @aws-cdk/aws-apigateway
+RUN npm i @aws-cdk/aws-ssm
+RUN npm i @aws-cdk/aws-s3
+RUN npm i aws-sdk
+RUN npm i @aws-cdk/aws-dynamodb
+RUN npm i @aws-cdk/aws-sqs
+RUN npm i @aws-cdk/aws-lambda-event-sources
+RUN npm i @aws-cdk/aws-apigatewayv2
+RUN npm i @types/chai
+RUN npm i dateformat
+RUN npm i @types/fs-extra
+RUN npm i @types/minimist
+RUN npm i @types/mkdirp
+RUN npm i @types/node
+RUN npm i @jest/core@25.5.4
+RUN npm i xhr@2.0.1
+RUN npm i ts-jest
+RUN npm i core-js
+
+RUN npm i ts-node
+RUN npm i path
+RUN npm i fs
+
+RUN npm i -g typescript
+ 
 ENTRYPOINT [ "jenkins-slave" ]
