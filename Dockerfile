@@ -16,13 +16,7 @@ RUN apk --update --no-cache add \
 
 RUN apk add --no-cache git
 RUN apk add nodejs
-RUN npm install -g @angular/cli
-RUN npm install -g aws-cdk
-RUN npm -g install typescript
-RUN npm install -g gulp
-RUN npm install gulp
 RUN apk add --no-cache curl
-
 
 RUN apk update && apk --no-cache add \
   g++ \
@@ -30,6 +24,22 @@ RUN apk update && apk --no-cache add \
   libffi-dev \
   openssl-dev \
   zip
+
+USER jenkins
+RUN cd /home/jenkins
+RUN touch .bashrc .bash_profile
+
+RUN (curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash)
+RUN source /home/jenkins/.bashrc && nvm install v12.20.2
+RUN node --version
+RUN npm install aws-sdk
+RUN npm install uuid
+
+RUN npm install -g @angular/cli
+RUN npm install -g aws-cdk
+RUN npm -g install typescript
+RUN npm install -g gulp
+RUN npm install gulp
 
 RUN npm install @aws-cdk/cloud-assembly-schema
 RUN npm install @aws-cdk/cx-api
@@ -42,7 +52,7 @@ RUN npm i @aws-cdk/aws-iam
 RUN npm i @aws-cdk/aws-apigateway
 RUN npm i @aws-cdk/aws-ssm
 RUN npm i @aws-cdk/aws-s3
-RUN npm i aws-sdk
+
 RUN npm i @aws-cdk/aws-dynamodb
 RUN npm i @aws-cdk/aws-sqs
 RUN npm i @aws-cdk/aws-lambda-event-sources
@@ -63,5 +73,6 @@ RUN npm i path
 RUN npm i fs
 
 RUN npm i -g typescript
+
  
 ENTRYPOINT [ "jenkins-slave" ]
