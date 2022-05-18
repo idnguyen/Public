@@ -14,13 +14,12 @@ RUN apk --update --no-cache add \
     && apk del \
     && rm -rf /var/cache/apk/* /root/.cache/pip/*
 
-RUN apk add --no-cache git
-RUN apk add nodejs
-RUN npm install -g @angular/cli
-RUN npm install -g aws-cdk
-RUN npm -g install typescript
-RUN npm install -g gulp
-RUN npm install gulp
-RUN apk add --no-cache curl
+RUN apk add --no-cache git \
+    && apk add nodejs \
+    && npm install -g @angular/cli \
+    && npm install -g aws-cdk \
+    && npm -g install typescript \
+    && npm install -g gulp \
+    && apk add --no-cache curl
 
 ENTRYPOINT [ "jenkins-slave" ]
