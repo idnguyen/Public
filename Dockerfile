@@ -12,4 +12,5 @@ RUN apk --update --no-cache add \
     zip \
     curl
 
+
 ENTRYPOINT [ "jenkins-slave" ]
